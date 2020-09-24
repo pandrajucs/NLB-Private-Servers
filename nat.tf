@@ -24,7 +24,8 @@ resource "aws_route_table" "NAT-RT" {
 }
 
 //create route table association
+
 resource "aws_route_table_association" "RouteTableAss" {
-  
+   subnet_id      = "subnet-0febc75bdca1a539b"
   route_table_id = "${aws_route_table.NAT-RT.id}"
 }

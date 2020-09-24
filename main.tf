@@ -1,9 +1,13 @@
+//Provide AWS Access key and Secret key to execute terraform
+
 provider "aws" {
     access_key = "XXXXXXX"
     secret_key = "YYYYYYY"
     region = "us-east-1"
     
 }
+
+//Craete Security group
 
 resource "aws_security_group" "allow_all" {
   name        = "allow_all"
@@ -24,6 +28,9 @@ resource "aws_security_group" "allow_all" {
     cidr_blocks     = ["0.0.0.0/0"]
     }
 }
+
+//Create TG
+
 resource "aws_lb_target_group" "tg" {
   name     = "NLB-TG"
   port     = 80
@@ -31,6 +38,8 @@ resource "aws_lb_target_group" "tg" {
   vpc_id   = "vpc-03fce764d6d3fdd1f"
  
 }
+
+//Create NLB
 
 resource "aws_lb" "nlb" {
   name               = "aws-nlb"
@@ -41,6 +50,7 @@ resource "aws_lb" "nlb" {
 } 
 
 
+//Create Elastic IP address for NAT GW
 
 resource "aws_eip" "lb" {
   vpc      = true
